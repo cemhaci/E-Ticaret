@@ -173,7 +173,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KategorilersController.cs" />
+    <Compile Include="Controllers\KategorilerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SepetController.cs" />
     <Compile Include="Controllers\UrunlerController.cs" />
@@ -477,12 +477,22 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Sepet\Index.cshtml" />
+    <Content Include="Views\Kategoriler\Create.cshtml" />
+    <Content Include="Views\Kategoriler\Delete.cshtml" />
+    <Content Include="Views\Kategoriler\Details.cshtml" />
+    <Content Include="Views\Kategoriler\Edit.cshtml" />
+    <Content Include="Views\Kategoriler\Index.cshtml" />
+    <Content Include="Views\Urunler\Create.cshtml" />
+    <Content Include="Views\Urunler\Delete.cshtml" />
+    <Content Include="Views\Urunler\Details.cshtml" />
+    <Content Include="Views\Urunler\Edit.cshtml" />
+    <Content Include="Views\Urunler\Index.cshtml" />
+    <Content Include="Views\Home\Urun.cshtml" />
+    <Content Include="Views\Home\Kategori.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Kategorilers\" />
-    <Folder Include="Views\Sepet\" />
-    <Folder Include="Views\Urunler\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

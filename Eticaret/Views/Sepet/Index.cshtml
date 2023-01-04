@@ -1,0 +1,43 @@
+﻿@using Eticaret
+@model IEnumerable<Eticaret.Models.Sepet>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Urunler.UrunAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToplamTutar)
+        </th>
+    </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urunler.UrunAdi)
+            </td>
+            <td>
+                <form action="/Sepet/SepetGuncelle">
+                    <input type="hidden" name="id" value="@item.SepetID" id="id" />
+                    <input type="number" name="adet" value="@item.Adet" id="adet" />
+                    <input type="submit" value="Güncelle" id="gonder" />
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem=>item.ToplamTutar)
+            </td>
+            <td>
+                @Html.ActionLink("sil","Delete",new{id=item.SepetID },new{@class="btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>

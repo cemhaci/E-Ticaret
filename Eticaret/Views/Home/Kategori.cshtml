@@ -1,0 +1,54 @@
+﻿@using Eticaret.Models
+@model List<Urunler>
+@{
+    Kategoriler kat = (Kategoriler)ViewBag.kategori;
+    ViewBag.Title = kat.KategoriAdi;
+}
+
+
+<div class="jumbotron">
+    <h1>ASP.NET MVC ETicaret Projesi</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Kategoriler</h2>
+        <ul style="list-style:none;">
+            @foreach (Kategoriler item in (List<Kategoriler>)ViewBag.Kategoriler)
+            {
+                <li>
+                    @Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriID })
+                </li>
+            }
+        </ul>
+    </div>
+
+    <div class="col-md-9">
+        <h2>Ürünler</h2>
+        <div class="row">
+            @foreach (Urunler item in Model)
+            {
+                <div class="col-md-4" style="border:2px solid">
+                    <h5>@item.UrunAdi</h5>
+                    <img src="/Resim/@(item.UrunID+".jpg")" style="width:50%;" />
+
+                    <p>
+                        <a href="/Home/Urun/@item.UrunID" class="btn btn-default">
+                            Ürün Detay &raquo;
+                        </a>
+                        <span style="float:right;color:red;font-size:15px;font-weight:bold">@item.UrunFiyati TL</span>
+                    </p>
+
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
+

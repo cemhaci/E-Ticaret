@@ -14,20 +14,22 @@ namespace Eticaret.Controllers
         ETicaretEntities db= new ETicaretEntities();
         public ActionResult Index()
         {
-            return View();
+            string kulID=User.Identity.GetUserId();
+           
+            return View(db.Sepet.Where(x=>x.KullaniciID==kulID).ToList());
         }
-        public ActionResult sepetEkle(int id,int adet)
+        public ActionResult sepetEkle(int urunid,int adet)
 		{
             string kulID=User.Identity.GetUserId();  //login olan kullanıcının  idsini getir
-            Sepet sepettekiurun=db.Sepet.FirstOrDefault(x=>x.UrunID==id&&x.KullaniciID==kulID);
+            Sepet sepettekiurun=db.Sepet.FirstOrDefault(x=>x.UrunID==urunid&&x.KullaniciID==kulID);
 
-            Urunler urun=db.Urunler.Find(id);
+            Urunler urun=db.Urunler.Find(urunid);
             if(sepettekiurun == null)
 			{
                 Sepet yeniurun=new Sepet()
 				{
                     KullaniciID=kulID,
-                    UrunID=id,
+                    UrunID=urunid,
                     Adet=adet,
                     ToplamTutar=urun.UrunFiyati* adet
 
@@ -42,5 +44,31 @@ namespace Eticaret.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
 		}
+
+        public ActionResult sepetGuncelle(int? id, int adet)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+
+            Sepet sepet =db.Sepet.Find(id);
+            if(sepet == null)
+            {
+                return HttpNotFound();
+            }
+            Urunler urun=db.Urunler.Find(sepet.UrunID);
+            sepet.Adet=adet;
+            sepet.ToplamTutar=sepet.Adet*urun.UrunFiyati;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult delete (int id)
+        {
+            Sepet sepet = db.Sepet.Find(id);
+            db.Sepet.Remove(sepet); //sepetteki satırı siliyoruz
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

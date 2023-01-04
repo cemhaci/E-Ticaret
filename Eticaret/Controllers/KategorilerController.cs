@@ -10,17 +10,17 @@ using Eticaret.Models;
 
 namespace Eticaret.Controllers
 {
-    public class KategorilersController : Controller
+    public class KategorilerController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
 
-        // GET: Kategorilers
+        // GET: Kategoriler
         public ActionResult Index()
         {
             return View(db.Kategoriler.ToList());
         }
 
-        // GET: Kategorilers/Details/5
+        // GET: Kategoriler/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,13 +35,13 @@ namespace Eticaret.Controllers
             return View(kategoriler);
         }
 
-        // GET: Kategorilers/Create
+        // GET: Kategoriler/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Kategorilers/Create
+        // POST: Kategoriler/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,7 +58,7 @@ namespace Eticaret.Controllers
             return View(kategoriler);
         }
 
-        // GET: Kategorilers/Edit/5
+        // GET: Kategoriler/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,7 +73,7 @@ namespace Eticaret.Controllers
             return View(kategoriler);
         }
 
-        // POST: Kategorilers/Edit/5
+        // POST: Kategoriler/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace Eticaret.Controllers
             return View(kategoriler);
         }
 
-        // GET: Kategorilers/Delete/5
+        // GET: Kategoriler/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace Eticaret.Controllers
             return View(kategoriler);
         }
 
-        // POST: Kategorilers/Delete/5
+        // POST: Kategoriler/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

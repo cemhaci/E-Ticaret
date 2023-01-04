@@ -12,10 +12,21 @@ namespace Eticaret.Controllers
 		ETicaretEntities db= new ETicaretEntities();
 		public ActionResult Index()
 		{
-			ViewBag.kategoriler=db.Kategoriler;
-			ViewBag.urunler=db.Urunler;
+			ViewBag.Kategoriler=db.Kategoriler.ToList();
+			ViewBag.Urunler=db.Urunler.ToList();
 
 			return View();
+		}
+		public ActionResult Urun(int id)
+		{
+			ViewBag.Kategoriler = db.Kategoriler.ToList();
+			return View(db.Urunler.Find(id));
+		}
+		public ActionResult Kategori(int id)
+		{
+			ViewBag.Kategoriler = db.Kategoriler.ToList();
+			ViewBag.kategori = db.Kategoriler.Find(id);
+			return View(db.Urunler.Where(x => x.KategoriID == id).ToList());
 		}
 
 		public ActionResult About()
