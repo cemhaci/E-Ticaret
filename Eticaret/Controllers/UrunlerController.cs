@@ -57,7 +57,7 @@ namespace Eticaret.Controllers
                 db.SaveChanges();
                 if (urunResim != null)
                 {
-                    string dosya = Path.Combine(Server.MapPath("~/Resim/"), urunler.UrunID + ".jpg");
+                    string dosya = Path.Combine(Server.MapPath("~/Resim/"), urunler.UrunID + ".jpg");  //
                     urunResim.SaveAs(dosya);
                 }
                 return RedirectToAction("Index");
@@ -88,12 +88,17 @@ namespace Eticaret.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UrunID,UrunAdi,KategoriID,UrunAciklamasi,UrunFiyati")] Urunler urunler)
+        public ActionResult Edit(Urunler urunler, HttpPostedFileBase urunResim)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(urunler).State = EntityState.Modified;
                 db.SaveChanges();
+                if (urunResim != null)
+                {
+                    string dosya = Path.Combine(Server.MapPath("~/Resim/"), urunler.UrunID + ".jpg");
+                    urunResim.SaveAs(dosya);
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.KategoriID = new SelectList(db.Kategoriler, "KategoriID", "KategoriAdi", urunler.KategoriID);

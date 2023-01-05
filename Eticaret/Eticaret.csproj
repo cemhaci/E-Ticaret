@@ -176,6 +176,7 @@
     <Compile Include="Controllers\KategorilerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SepetController.cs" />
+    <Compile Include="Controllers\SiparisController.cs" />
     <Compile Include="Controllers\UrunlerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -402,6 +403,7 @@
     <Content Include="Content\template\ogani-master\Source\font-awesome-4.7.0 - Copy.zip" />
     <Content Include="Content\template\ogani-master\Source\jquery-nice-select-1.1.0 - Copy.zip" />
     <Content Include="Content\template\ogani-master\Source\jquery-ui-1.12.1 - Copy.zip" />
+    <Content Include="Resim\1.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -490,6 +492,9 @@
     <Content Include="Views\Urunler\Index.cshtml" />
     <Content Include="Views\Home\Urun.cshtml" />
     <Content Include="Views\Home\Kategori.cshtml" />
+    <Content Include="Views\Siparis\Index.cshtml" />
+    <Content Include="Views\Siparis\SiparisTamamla.cshtml" />
+    <Content Include="Views\Siparis\tamamlandi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

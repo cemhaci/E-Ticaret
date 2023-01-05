@@ -28,15 +28,16 @@
                     {
 
                         <div class="col">
-                            <div class="card">
-                                <img src="/Resim/@(item.UrunID+".jpg")" class="card-img-top" alt="...">
+                            <div class="card" style="width: 18rem; height:stretch">
+                                <img style="height:180px" src="/Resim/@(item.UrunID+".jpg")" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">@item.UrunAdi</h5>
                                     <p>
-                                        <a href="/Home/Urun/@item.UrunID" class="btn btn-default">
-                                            Ürün Detay &raquo;
-                                        </a>
-                                        <span style="float:right;color:red;font-size:15px;font-weight:bold">@item.UrunFiyati TL</span>
+                                    <p class="card-text">@item.UrunAciklamasi</p>
+                                    <a href="/Home/Urun/@item.UrunID" class="btn btn-success">
+                                        Ürün Detay &raquo;
+                                    </a>
+                                    <span style="float:right;color:red;font-size:15px;font-weight:bold">@item.UrunFiyati TL</span>
                                     </p>
                                 </div>
                             </div>

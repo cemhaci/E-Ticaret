@@ -6,10 +6,10 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Urunler", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Urunler</h4>
         <hr />
@@ -47,7 +47,16 @@
                 @Html.ValidationMessageFor(model => model.UrunFiyati, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @*<div class="form-group">
+                <label class="control-label col-md-2">Ürün Resim</label>
+                <div class="col-md-10">
+                    <input type="file" id="urunResim" name="urunResim" class="form-control" />
+                </div>
+            </div>*@
+        <div class="mb-3">
+            <label for="urunResim" class="form-label">Ürün Resim</label>
+            <input class="form-control" type="file" id="urunResim" name="urunResim">
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
