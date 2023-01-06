@@ -14,7 +14,7 @@
                 @foreach (Kategoriler item in (List<Kategoriler>)ViewBag.Kategoriler)
                 {
 
-                    <li class="list-group-item">@Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriID })</li>
+                    <li class="list-group-item-action">@Html.ActionLink(item.KategoriAdi, "Kategori", new { id = item.KategoriID })</li>
 
                 }
             </ul>
@@ -38,7 +38,6 @@
                                         Ürün Detay &raquo;
                                     </a>
                                     <span style="float:right;color:red;font-size:15px;font-weight:bold">@item.UrunFiyati TL</span>
-                                    </p>
                                 </div>
                             </div>
                         </div>

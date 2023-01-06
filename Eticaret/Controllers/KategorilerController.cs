@@ -4,20 +4,33 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using Eticaret.Models;
+using Newtonsoft.Json;
 
 namespace Eticaret.Controllers
 {
     public class KategorilerController : Controller
     {
         private ETicaretEntities db = new ETicaretEntities();
-
+        HttpClient client = new HttpClient();
+        List<Kategoriler> kategoriler=new List<Kategoriler>();
         // GET: Kategoriler
         public ActionResult Index()
         {
-            return View(db.Kategoriler.ToList());
+            client.BaseAddress=new Uri("https://localhost:44305/api/");
+            var response= client.GetAsync("Kategori"); //api deki get i çağrmak için async yaptık
+            response.Wait();  //async methodlarda genelde wait lememiz gerekir
+            var result=response.Result;
+            if(result.IsSuccessStatusCode) //sonuc başarılı ise
+            {
+                var data=result.Content.ReadAsStringAsync();  //gelen json bilgisini string olarak okuyor
+                data.Wait();
+               kategoriler= JsonConvert.DeserializeObject<List<Kategoriler>>(data.Result);  //string olaraka okunan bilgiyi jsona çeviriyor deserilize ile. ve bunu view de gösteriyor
+            }
+            return View(kategoriler);
         }
 
         // GET: Kategoriler/Details/5
@@ -46,12 +59,14 @@ namespace Eticaret.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "KategoriID,KategoriAdi")] Kategoriler kategoriler)
+        public ActionResult Create( Kategoriler kategoriler)
         {
             if (ModelState.IsValid)
             {
-                db.Kategoriler.Add(kategoriler);
-                db.SaveChanges();
+                client.BaseAddress = new Uri("https://localhost:44305/api/");
+                var response=HttpClientExtensions.PostAsJsonAsync
+                //db.Kategoriler.Add(kategoriler);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
