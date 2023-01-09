@@ -31,8 +31,8 @@ namespace wep_Api_Project.Controllers
             Kategoriler kategori=db.Kategoriler.Find(id);
             Kategori kat = new Kategori()   //kategorilerin urunleri de olduğudan kategori id yi getirdiğimizden hata veriyor o yüzden kategori classı oluşturup içinde sadece kategori bilgileri atıp api de onu gösteriyoruz
             {
-                id = kategori.KategoriID,
-                name = kategori.KategoriAdi
+                KategoriID = kategori.KategoriID,
+                KategoriAdi = kategori.KategoriAdi
             };
             return Ok(kat);
         }
@@ -40,6 +40,19 @@ namespace wep_Api_Project.Controllers
         public IHttpActionResult post([FromBody]Kategoriler kategori)
         {
             db.Kategoriler.Add(kategori);
+            db.SaveChanges();
+            return Ok();
+        }
+        public IHttpActionResult put([FromBody] Kategoriler kategori)
+        {
+            db.Entry(kategori).State=EntityState.Modified;  //entity nin durumu değişti
+            db.SaveChanges();
+            return Ok();
+        }
+        public IHttpActionResult delete([FromBody] int id)
+        {
+            Kategoriler kategori=db.Kategoriler.Find(id);  //apimiz veri tabanımıza bağlı apiyi yönlendirdiğimiz sitede ekle ve ya sil yaptığında api aracılığıyla veri tabanımızdan bilgi siliniyor
+            db.Kategoriler.Remove(kategori);
             db.SaveChanges();
             return Ok();
         }

@@ -40,12 +40,29 @@ namespace Eticaret.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Kategoriler kategoriler = db.Kategoriler.Find(id);
+             Kategoriler kategoriler= KategoriBul(id);
+            //Kategoriler kategoriler = db.Kategoriler.Find(id);
             if (kategoriler == null)
             {
                 return HttpNotFound();
             }
             return View(kategoriler);
+        }
+
+        private Kategoriler KategoriBul(int? id)
+        {
+            Kategoriler kategoriler = null;
+            client.BaseAddress = new Uri("https://localhost:44305/api/");
+            var response = client.GetAsync("Kategori/" + id);
+            response.Wait();
+            var result = response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var data = result.Content.ReadAsAsync<Kategoriler>();
+                data.Wait();
+                kategoriler = data.Result;
+            }
+            return kategoriler;
         }
 
         // GET: Kategoriler/Create
@@ -64,10 +81,17 @@ namespace Eticaret.Controllers
             if (ModelState.IsValid)
             {
                 client.BaseAddress = new Uri("https://localhost:44305/api/");
-                var response=HttpClientExtensions.PostAsJsonAsync
+               // var response=HttpClientExtensions.PostAsJsonAsync<Kategoriler>(client,"Kategori",kategoriler);
+                var response = client.PostAsJsonAsync<Kategoriler>("Kategori", kategoriler);  //post işlemi için gelen veriyi apiye gönderiyor
+                response.Wait();
+                var result=response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
                 //db.Kategoriler.Add(kategoriler);
                 //db.SaveChanges();
-                return RedirectToAction("Index");
+                return View(kategoriler);
             }
 
             return View(kategoriler);
@@ -97,9 +121,17 @@ namespace Eticaret.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(kategoriler).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                client.BaseAddress = new Uri("https://localhost:44305/api/");
+                var response=client.PutAsJsonAsync<Kategoriler>("Kategori",kategoriler);  //"Kategori" apide ki controller ın adı
+                response.Wait();
+
+                var result=response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                //db.Entry(kategoriler).State = EntityState.Modified;
+                //db.SaveChanges();
             }
             return View(kategoriler);
         }
@@ -124,9 +156,15 @@ namespace Eticaret.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Kategoriler kategoriler = db.Kategoriler.Find(id);
-            db.Kategoriler.Remove(kategoriler);
-            db.SaveChanges();
+            client.BaseAddress = new Uri("https://localhost:44305/api/");
+            var response=client.DeleteAsync("Kategori/"+id);
+           
+            var result=response.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

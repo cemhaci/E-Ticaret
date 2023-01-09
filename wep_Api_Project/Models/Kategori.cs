@@ -7,8 +7,8 @@ namespace wep_Api_Project.Models
 {
     public class Kategori
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int KategoriID { get; set; }
+        public string KategoriAdi { get; set; }
       
 
     }
